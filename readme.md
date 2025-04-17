@@ -25,8 +25,8 @@ A 2D space shooter game developed in **C++ using SFML**, featuring smooth player
 
 | Action       | Key         |
 |--------------|-------------|
-| Move         | Arrow Keys / WASD |
-| Shoot        | Spacebar    |
+| Move         | WASD |
+| Shoot        | MOUSE RIGHT CLICK    |
 | Exit Game    | Escape      |
 
 ---
