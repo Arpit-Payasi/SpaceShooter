@@ -14,6 +14,7 @@ Bullet::Bullet(Texture *texture, float posX, float posY, float x, float y, float
     this->damage = damage;
 }
 
+
 Bullet::~Bullet() = default;
 
 FloatRect Bullet::getBounds() const {

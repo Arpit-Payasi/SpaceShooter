@@ -11,7 +11,7 @@ void Player::initVariables() {
 
 void Player::initTexture() {
     if (!this->texture.loadFromFile("Textures/ship.png"))
-        cout << "ERROR::PLAYER::TEXTURE LOADING FAIL!!!" << endl;
+        std::cout << "ERROR::PLAYER::TEXTURE LOADING FAIL!!!" << std::endl;
 }
 
 void Player::initSprite() {
@@ -24,7 +24,6 @@ Player::Player() {
     this->initVariables();
     this->initTexture();
     this->initSprite();
-
 }
 
 Player::~Player() = default;
@@ -69,6 +68,30 @@ void Player::loseHp(int value) {
 
 void Player::move(const float x, const float y) {
     this->sprite.move(this->movementSpeed * x, this->movementSpeed * y);
+
+    // Rotate based on movement direction
+    if (x < 0) {
+        this->sprite.setRotation(-10.f); // Rotate left
+    } else if (x > 0) {
+        this->sprite.setRotation(10.f); // Rotate right
+    } else {
+        this->sprite.setRotation(0.f); // Reset rotation when no horizontal movement
+    }
+
+    // Screen boundary enforcement (assuming window size is 1000x800)
+    sf::Vector2f pos = this->sprite.getPosition();
+    sf::FloatRect bounds = this->sprite.getGlobalBounds();
+
+    if (pos.x < 0.f)
+        pos.x = 0.f;
+    if (pos.y < 0.f)
+        pos.y = 0.f;
+    if (pos.x + bounds.width > 1000.f)
+        pos.x = 1000.f - bounds.width;
+    if (pos.y + bounds.height > 800.f)
+        pos.y = 800.f - bounds.height;
+
+    this->sprite.setPosition(pos);
 }
 
 bool Player::canAttack() const {

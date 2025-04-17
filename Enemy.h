@@ -1,48 +1,64 @@
-#pragma once
+#ifndef ENEMY_H
+#define ENEMY_H
 
-
-#include <iostream>
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
 
-using namespace std;
 using namespace sf;
 
 class Enemy {
 private:
-    unsigned pointCount;
-    CircleShape shape;
+    // Private member variables
+    int pointCount;
     float speed;
-    int hp;
     int hpMax;
+    int hp;
     int damage;
     int points;
 
-    void initVariables();
+    // Private visual components
+    CircleShape shape;
+    CircleShape aura;
+    CircleShape eye1;
+    CircleShape eye2;
 
+    // Clock for the pulse animation
+    Clock pulseClock;
+
+    // Private functions
+    void initVariables();
     void initShape();
 
-
 public:
+    // Constructor / Destructor
     Enemy(float posX, float posY);
+    ~Enemy();
 
-    virtual ~Enemy();
-
+    // Getter for bounds of the enemy
     FloatRect getBounds() const;
 
+    // Getter for points associated with the enemy
     int getPoints() const;
 
+    // Getter for the damage the enemy can deal
     int getDamage() const;
 
-    void loseHP(int value);
-
-    void setTransparent(int transparent);
-
+    // Getter for the current HP of the enemy
     int getHp() const;
 
+    // Getter for the maximum HP of the enemy
     int getHpMax() const;
 
+    // Function to lose health
+    void loseHP(int value);
+
+    // Function to change transparency of the enemy
+    void setTransparent(int transparent);
+
+    // Function to update the enemy's logic
     void update();
 
-    void render(RenderTarget *target);
+    // Function to render the enemy
+    void render(RenderTarget* target);
 };
+
+#endif // ENEMY_H
